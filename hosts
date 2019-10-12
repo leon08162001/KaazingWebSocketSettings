@@ -1,0 +1,77 @@
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+#192.168.43.110		leonpc.asuscomm.com
+#127.0.0.1 		hub5btmain.sandai.net
+#127.0.0.1 		hub5emu.sandai.net
+
+#192.168.23.127   leonpc.asuscomm.com
+#192.168.23.128   leonpc.asuscomm.com
+#192.168.23.129   leonpc.asuscomm.com
+#192.168.23.130   leonpc.asuscomm.com
+
+#192.168.23.127   leonpc1.asuscomm.com
+#192.168.23.128   leonpc2.asuscomm.com
+#192.168.23.129   leonpc3.asuscomm.com
+#192.168.23.130   leonpc4.asuscomm.com
+
+192.168.43.114   leonpc.asuscomm.com
+
+192.168.43.115   WebSocketBalancer.asuscomm.com
+192.168.43.116   WebSocketBalancer.asuscomm.com
+192.168.43.117   WebSocketBalancer.asuscomm.com
+192.168.43.118   WebSocketBalancer.asuscomm.com
+
+192.168.43.115   WebSocketServer1.asuscomm.com
+192.168.43.116   WebSocketServer2.asuscomm.com
+192.168.43.117   WebSocketServer3.asuscomm.com
+192.168.43.118   WebSocketServer4.asuscomm.com
+192.168.43.119   ActiveMQ1.asuscomm.com
+192.168.43.120   ActiveMQ2.asuscomm.com
+192.168.43.121   ActiveMQ3.asuscomm.com
+192.168.43.122   ActiveMQ4.asuscomm.com
+192.168.43.123   ActiveMQ5.asuscomm.com
+192.168.43.124   ActiveMQ6.asuscomm.com
+192.168.43.125   ActiveMQ7.asuscomm.com
+192.168.43.126   ActiveMQ8.asuscomm.com
+
+
+192.168.43.127   leonnote.asuscomm.com
+
+192.168.43.128   WebSocketBalancer1.asuscomm.com
+192.168.43.129   WebSocketBalancer1.asuscomm.com
+192.168.43.130   WebSocketBalancer1.asuscomm.com
+192.168.43.131   WebSocketBalancer1.asuscomm.com
+
+192.168.43.128   WebSocketServer5.asuscomm.com
+192.168.43.129   WebSocketServer6.asuscomm.com
+192.168.43.130   WebSocketServer7.asuscomm.com
+192.168.43.131   WebSocketServer8.asuscomm.com
+192.168.43.132   ActiveMQ9.asuscomm.com
+192.168.43.133   ActiveMQ10.asuscomm.com
+192.168.43.134   ActiveMQ11.asuscomm.com
+192.168.43.135   ActiveMQ12.asuscomm.com
+192.168.43.136   ActiveMQ13.asuscomm.com
+192.168.43.137   ActiveMQ14.asuscomm.com
+192.168.43.138   ActiveMQ15.asuscomm.com
+192.168.43.139   ActiveMQ16.asuscomm.com
+
+
