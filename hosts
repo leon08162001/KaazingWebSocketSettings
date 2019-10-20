@@ -23,22 +23,12 @@
 #127.0.0.1 		hub5btmain.sandai.net
 #127.0.0.1 		hub5emu.sandai.net
 
-#192.168.23.127   leonpc.asuscomm.com
-#192.168.23.128   leonpc.asuscomm.com
-#192.168.23.129   leonpc.asuscomm.com
-#192.168.23.130   leonpc.asuscomm.com
-
-#192.168.23.127   leonpc1.asuscomm.com
-#192.168.23.128   leonpc2.asuscomm.com
-#192.168.23.129   leonpc3.asuscomm.com
-#192.168.23.130   leonpc4.asuscomm.com
-
 192.168.43.114   leonpc.asuscomm.com
 
 192.168.43.115   WebSocketBalancer.asuscomm.com
-192.168.43.116   WebSocketBalancer.asuscomm.com
-192.168.43.117   WebSocketBalancer.asuscomm.com
-192.168.43.118   WebSocketBalancer.asuscomm.com
+192.168.43.116   WebSocketBalancerFO1.asuscomm.com
+192.168.43.117   WebSocketBalancerFO2.asuscomm.com
+192.168.43.118   WebSocketBalancerFO3.asuscomm.com
 
 192.168.43.115   WebSocketServer1.asuscomm.com
 192.168.43.116   WebSocketServer2.asuscomm.com
@@ -57,9 +47,9 @@
 192.168.43.127   leonnote.asuscomm.com
 
 192.168.43.128   WebSocketBalancer1.asuscomm.com
-192.168.43.129   WebSocketBalancer1.asuscomm.com
-192.168.43.130   WebSocketBalancer1.asuscomm.com
-192.168.43.131   WebSocketBalancer1.asuscomm.com
+192.168.43.129   WebSocketBalancer1FO1.asuscomm.com
+192.168.43.130   WebSocketBalancer1FO2.asuscomm.com
+192.168.43.131   WebSocketBalancer1FO3.asuscomm.com
 
 192.168.43.128   WebSocketServer5.asuscomm.com
 192.168.43.129   WebSocketServer6.asuscomm.com

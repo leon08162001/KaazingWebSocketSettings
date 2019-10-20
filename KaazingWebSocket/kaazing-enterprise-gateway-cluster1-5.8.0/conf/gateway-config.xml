@@ -50,6 +50,18 @@
       <value>WebSocketBalancer.asuscomm.com</value>
     </property>
     <property>
+      <name>balancerFO1.gateway.hostname</name>
+      <value>WebSocketBalancerFO1.asuscomm.com</value>
+    </property>
+    <property>
+      <name>balancerFO2.gateway.hostname</name>
+      <value>WebSocketBalancerFO2.asuscomm.com</value>
+    </property>
+    <property>
+      <name>balancerFO3.gateway.hostname</name>
+      <value>WebSocketBalancerFO3.asuscomm.com</value>
+    </property>
+    <property>
       <name>worker.gateway.ip</name>
       <value>192.168.43.116</value>
     </property>
@@ -430,16 +442,86 @@
   <cross-site-constraint>
   	<allow-origin>https://leonpc.asuscomm.com:1443</allow-origin>
   </cross-site-constraint>
+</service>
+
+<service>
+  <name>JMS balancerFO1</name>
+  <accept>ws://${balancerFO1.gateway.hostname}:8001/jms</accept>
+  <type>balancer</type>
+  <accept-options>
+  	<ws.bind>${worker.gateway.hostname}:8001</ws.bind>
+  </accept-options>
   <cross-site-constraint>
-  	<allow-origin>https://192.168.43.114:1443</allow-origin>
+  	<allow-origin>http://leonpc.asuscomm.com:80</allow-origin>
+  </cross-site-constraint>
+  </service>
+<service>
+  <name>JMS balancer1FO1</name>
+  <accept>wss://${balancerFO1.gateway.hostname}:9001/jms</accept>
+  <type>balancer</type>
+  <accept-options>
+  	<wss.bind>${worker.gateway.hostname}:9001</wss.bind>
+  </accept-options>
+  <cross-site-constraint>
+  	<allow-origin>https://leonpc.asuscomm.com:1443</allow-origin>
   </cross-site-constraint>
 </service>
+
+<service>
+  <name>JMS balancerFO2</name>
+  <accept>ws://${balancerFO2.gateway.hostname}:8001/jms</accept>
+  <type>balancer</type>
+  <accept-options>
+  	<ws.bind>${worker.gateway.hostname}:8001</ws.bind>
+  </accept-options>
+  <cross-site-constraint>
+  	<allow-origin>http://leonpc.asuscomm.com:80</allow-origin>
+  </cross-site-constraint>
+  </service>
+<service>
+  <name>JMS balancer1FO2</name>
+  <accept>wss://${balancerFO2.gateway.hostname}:9001/jms</accept>
+  <type>balancer</type>
+  <accept-options>
+  	<wss.bind>${worker.gateway.hostname}:9001</wss.bind>
+  </accept-options>
+  <cross-site-constraint>
+  	<allow-origin>https://leonpc.asuscomm.com:1443</allow-origin>
+  </cross-site-constraint>
+</service>
+
+<service>
+  <name>JMS balancerFO3</name>
+  <accept>ws://${balancerFO3.gateway.hostname}:8001/jms</accept>
+  <type>balancer</type>
+  <accept-options>
+  	<ws.bind>${worker.gateway.hostname}:8001</ws.bind>
+  </accept-options>
+  <cross-site-constraint>
+  	<allow-origin>http://leonpc.asuscomm.com:80</allow-origin>
+  </cross-site-constraint>
+  </service>
+<service>
+  <name>JMS balancer1FO3</name>
+  <accept>wss://${balancerFO3.gateway.hostname}:9001/jms</accept>
+  <type>balancer</type>
+  <accept-options>
+  	<wss.bind>${worker.gateway.hostname}:9001</wss.bind>
+  </accept-options>
+  <cross-site-constraint>
+  	<allow-origin>https://leonpc.asuscomm.com:1443</allow-origin>
+  </cross-site-constraint>
+</service>
+<!-- JMS Balancer service for connections -->
  
  <service>
     <name>JMS Service</name>
     <description>JMS Service</description>
     <accept>ws://${worker.gateway.hostname}:8001/jms</accept>
     <balance>ws://${balancer.gateway.hostname}:8001/jms</balance>
+    <balance>ws://${balancerFO1.gateway.hostname}:8001/jms</balance>
+    <balance>ws://${balancerFO2.gateway.hostname}:8001/jms</balance>
+    <balance>ws://${balancerFO3.gateway.hostname}:8001/jms</balance>
     <!--
     The "Deploying Apple Push Notification Service (APNs)" section of the
     documentation discusses this element in more detail.  Alternatively, 
@@ -509,6 +591,9 @@
     <description>JMS Service1</description>
     <accept>wss://${worker.gateway.hostname}:9001/jms</accept>
     <balance>wss://${balancer.gateway.hostname}:9001/jms</balance>
+    <balance>wss://${balancerFO1.gateway.hostname}:9001/jms</balance>
+    <balance>wss://${balancerFO2.gateway.hostname}:9001/jms</balance>
+    <balance>wss://${balancerFO3.gateway.hostname}:9001/jms</balance>
     <!--
     The "Deploying Apple Push Notification Service (APNs)" section of the
     documentation discusses this element in more detail.  Alternatively, 
