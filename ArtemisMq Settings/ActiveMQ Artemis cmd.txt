@@ -1,0 +1,13 @@
+﻿cd F:\apache-artemis-2.10.1-bin\apache-artemis-2.10.1\bin
+
+artemis.cmd create F:\Artemis-2.10.1_MQ1
+
+F:\Artemis-2.10.1_MQ1\bin\artemis-service.exe install
+
+C:\Artemis-2.6.2_MQ1\bin\artemis-service.exe start
+
+C:\Artemis-2.6.2_MQ1\bin\artemis-service.exe stop
+
+F:\Artemis-2.10.1_MQ1\bin\artemis-service.exe uninstall
+
+sc delete "artemis-Artemis-2.6.2_MQ1-0.0.0.0"
