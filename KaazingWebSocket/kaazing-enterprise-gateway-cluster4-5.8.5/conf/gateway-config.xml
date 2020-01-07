@@ -379,6 +379,10 @@
       com.tibco.tibjms.naming.TibjmsInitialContextFactory
     </env.java.naming.factory.initial>
     <env.java.naming.provider.url>tcp://${worker.gateway.hostname}:7234</env.java.naming.provider.url>
+    <!--<env.com.tibco.tibjms.naming.security_protocol>ssl</env.com.tibco.tibjms.naming.security_protocol>
+    <env.java.naming.provider.url>ssl://leonpc.asuscomm.com:7255</env.java.naming.provider.url>
+    <env.com.tibco.tibjms.naming.ssl_enable_verify_host>true</env.com.tibco.tibjms.naming.ssl_enable_verify_host>
+    <env.com.tibco.tibjms.naming.ssl_trusted_certs>D:\ProgramData\TIBCO_HOME6\tibco\cfgmgmt\ems\certs\leonpc.asuscomm.com.cer</env.com.tibco.tibjms.naming.ssl_trusted_certs>-->
     <destination.strategy>session</destination.strategy>
   </properties>
   <!-- ActiveMQ -->
