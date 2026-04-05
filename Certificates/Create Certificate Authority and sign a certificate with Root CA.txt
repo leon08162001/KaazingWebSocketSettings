@@ -1,0 +1,53 @@
+0.go to openssl.exe folder
+cd C:\Program Files\OpenSSL-Win64\bin
+
+1.Generate a root CA private key:
+openssl genrsa -aes256 -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.key.pem" 4096
+
+2.Generate the root CA certificate
+openssl req -new -key "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.key.pem" -addext "subjectAltName = DNS:*.asuscomm.com" -x509 -days 7300 -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.cert.pem"
+
+3.Generate a server key and request for signing(CSR)
+--中繼憑證私鑰
+openssl genrsa -aes256 -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.key.pem" 4096
+--終端憑證私鑰
+openssl genrsa -aes256 -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.key.pem" 4096
+--中繼憑證請求檔
+openssl req -new -key "dC:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.key.pem" -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.csr"
+--終端憑證請求檔
+openssl req -new -key "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.key.pem" -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.csr"
+
+##verify CSR for SAN
+##openssl req -noout -text -in "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.csr"
+
+4.Sign a certificate with root CA
+--用root CA憑證簽署中繼憑證,並在中繼憑證中加入延伸SAN內容(使用外部檔案定義)
+openssl x509 -req -days 1000 -in "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.csr" -CA "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.cert.pem" -CAkey "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.key.pem" -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.cert.pem" -extfile "C:\Users\leon0\OneDrive\Desktop\Certificates\Intermediate.req_extensions.conf" -extensions v3_req
+--用中繼憑證(也是CA)簽署終端憑證,並在終端憑證中加入延伸SAN內容(使用外部檔案定義)
+openssl x509 -req -days 1000 -in "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.csr" -CA "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.cert.pem" -CAkey "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\Intermediate.key.pem" -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.cert.pem" -extfile "C:\Users\leon0\OneDrive\Desktop\Certificates\wildcard.asuscomm.com.req_extensions.conf" -extensions v3_req
+--用root CA憑證簽署終端憑證,並在終端憑證中加入延伸SAN內容(使用外部檔案定義)
+openssl x509 -req -days 1000 -in "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.csr" -CA "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.cert.pem" -CAkey "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.key.pem" -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.cert.pem" -extfile "C:\Users\leon0\OneDrive\Desktop\Certificates\wildcard.asuscomm.com.req_extensions.conf" -extensions v3_req
+
+5.Generate pfx from combine a private key & a certificate pem file(ca.pfx)
+openssl pkcs12 -export -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.pfx" -inkey "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.key.pem" -in "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\ca.cert.pem"
+
+6.Generate pfx from combine a private key & a certificate pem file(wildcard.asuscomm.com.pfx)
+openssl pkcs12 -export -out "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.pfx" -inkey "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.key.pem" -in "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.cert.pem"
+
+
+//kaazing Websocket begin
+//將匯出pfx檔(從憑證管理員匯出)轉換成JKS格式並匯入到指定檔案(keystore.db)
+keytool -importkeystore -srckeystore "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.pfx" -srcstoretype pkcs12 -srcalias 1 -destalias "wildcard.asuscomm.com" -destkeystore "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\New\Kaazing\mykeystore.db" -deststoretype JKS
+
+//將CER檔匯出成jks檔(truststore.db)
+keytool -importcert -file "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.cer" -alias "wildcard.asuscomm.com" -keystore "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\New\Kaazing\truststore.db"
+//kaazing Websocket end
+
+//ActiveMQ begin
+keytool -importkeystore -srckeystore "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.pfx" -srcstoretype pkcs12 -srcalias 1 -destalias "wildcard.asuscomm.com" -destkeystore "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\New\ActiveMQ\amq-server.ks" -deststoretype pkcs12
+
+keytool -importcert -file "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\wildcard.asuscomm.com.cer" -alias "wildcard.asuscomm.com" -keystore "C:\Users\leon0\OneDrive\Desktop\Certificates\openssl\New\ActiveMQ\amq-client.ts"
+//ActiveMQ end
+
+
+
